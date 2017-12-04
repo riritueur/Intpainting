@@ -42,7 +42,7 @@ public class InpaintingJFrame extends JFrame {
 	private JTextField txtR;
 	private JTextField txtG;
 	private JTextField txtB;
-	private boolean r, g ,b;
+	private boolean r=true, g=true ,b=true;
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
