@@ -71,7 +71,7 @@ public class ResultJFrame extends JFrame {
 		image.setIcon(new ImageIcon(newimg));
 		contentPane.add(image);
 
-		JButton btnDL = new JButton("T�l�charger");
+		JButton btnDL = new JButton("Télécharger");
 		btnDL.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnDL.setBounds(28, 362, 165, 40);
 		contentPane.add(btnDL);

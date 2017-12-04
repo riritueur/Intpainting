@@ -236,7 +236,6 @@ public class Inpainting {
 			C=new Components(b);
 			if(searchWidth!=0) searchWidth+=halfwidth;
 		}
-		System.out.println("Done");
 	};
 	
 //	public void restore(int a,int b) throws IOException{

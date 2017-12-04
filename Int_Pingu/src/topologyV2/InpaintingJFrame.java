@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
@@ -40,6 +42,7 @@ public class InpaintingJFrame extends JFrame {
 	private JTextField txtR;
 	private JTextField txtG;
 	private JTextField txtB;
+	private boolean r, g ,b;
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -122,7 +125,7 @@ public class InpaintingJFrame extends JFrame {
 		masque.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		masque.setOpaque(true);
 		masque.setBounds(662, 70, 250, 250);
-		masque.setBackground(Color.white);
+		masque.setBackground(null);
 		contentPane.add(masque);
 		
 		JSeparator separator = new JSeparator();
@@ -283,6 +286,36 @@ public class InpaintingJFrame extends JFrame {
 				}
 			}
 		});
+		
+		txtR.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (txtR.getText().equals("255") && r) {
+					txtR.setText("");
+					r = false;
+				}
+			}
+		});
+		txtG.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (txtG.getText().equals("255") && g) {
+					txtG.setText("");
+					g=false;
+				}
+			}
+		});
+		txtB.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (txtB.getText().equals("255") && b) {
+					txtB.setText("");
+					b=false;
+				}
+					
+			}
+		});
+		
 		
 	}
 }
