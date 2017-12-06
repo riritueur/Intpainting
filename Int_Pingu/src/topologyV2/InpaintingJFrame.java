@@ -11,6 +11,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,44 +43,33 @@ import javax.swing.border.TitledBorder;
 public class InpaintingJFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private static InpaintingJFrame frame;
+	private boolean r = true, g = true, b = true;
+	public static boolean traitement = false;
+	
 	private JPanel contentPane;
 	private JTextField txtLienImage;
 	private JTextField txtLienMasque;
 	private JTextField txtR;
 	private JTextField txtG;
 	private JTextField txtB;
-	private boolean r = true, g = true, b = true;
-
 	private JButton btnApply;
-
 	private JButton btnColorPicker;
-
 	private JButton btnExec;
-
 	private JComponent lblCouleur;
-
 	private JLabel lblTitreCouleur;
-
 	private JSeparator separator;
-
 	private JLabel masque;
-
 	private JLabel image;
-
 	private JButton btnSearchMasque;
-
 	private JLabel lblMasque;
-
 	private JLabel lblImage;
-
 	private JButton btnSearchImage;
-
 	private JLabel lblTitreImages;
-
 	private JLabel lblLoading;
-
 	private JLabel lblTitre;
+	
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException, UnsupportedLookAndFeelException {
@@ -87,7 +77,7 @@ public class InpaintingJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InpaintingJFrame frame = new InpaintingJFrame();
+					frame = new InpaintingJFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -123,7 +113,7 @@ public class InpaintingJFrame extends JFrame {
 		lblLoading.setFocusable(false);
 		lblLoading.setVisible(false);
 		lblLoading.setIcon(new ImageIcon("./Image/loading.gif"));
-		lblLoading.setBounds(388, 183, 96, 93);
+		lblLoading.setBounds(286, 95, 398, 313);
 		contentPane.add(lblLoading);
 
 		lblTitreImages = new JLabel("Sélection des 2 images");
@@ -275,7 +265,7 @@ public class InpaintingJFrame extends JFrame {
 				chooser.setDialogTitle("Choisir une image");
 				chooser.addChoosableFileFilter(imagesFilter);
 
-				int returnVal = chooser.showOpenDialog(null);
+				int returnVal = chooser.showOpenDialog(frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
 						Image img = ImageIO.read(chooser.getSelectedFile());
@@ -305,11 +295,11 @@ public class InpaintingJFrame extends JFrame {
 
 				JFileChooser chooser = new JFileChooser("./Image");
 				chooser.setAcceptAllFileFilterUsed(false);
-				FileFilter imagesFilter = new FileNameExtensionFilter("Image", "bmp"); // TODO
+				FileFilter imagesFilter = new FileNameExtensionFilter("Image", "bmp");
 				chooser.setDialogTitle("Choisir une image");
 				chooser.addChoosableFileFilter(imagesFilter);
 
-				int returnVal = chooser.showOpenDialog(null);
+				int returnVal = chooser.showOpenDialog(frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					try {
 						Image img = ImageIO.read(chooser.getSelectedFile());
@@ -349,13 +339,13 @@ public class InpaintingJFrame extends JFrame {
 		btnExec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (!txtLienImage.getText().isEmpty() || !txtLienMasque.getText().isEmpty()) {
-						
-						setAllFalse();
+					if (!txtLienImage.getText().isEmpty() || !txtLienMasque.getText().isEmpty() && !traitement) {
+						traitement = true;
 						lblLoading.setVisible(true);
-
 						JFrame result = new ResultJFrame(doTheIntpainting());
 						result.setVisible(true);
+						frame.setAllTrue();
+						
 					} else
 						JOptionPane.showMessageDialog(that, "Erreur : Image et/ou masque incorrect",
 								"Erreur de traitement", 0);
@@ -430,7 +420,7 @@ public class InpaintingJFrame extends JFrame {
 		return img;
 	}
 	
-	private void setAllFalse() {
+	private boolean setAllFalse() {
 		lblTitreImages.setVisible(false);
 		btnSearchImage.setVisible(false);
 		txtLienImage.setVisible(false);
@@ -450,10 +440,12 @@ public class InpaintingJFrame extends JFrame {
 		txtB.setVisible(false);
 		btnApply.setVisible(false);
 		lblLoading.setVisible(false);
+		
+		return true;
 	}
 	
 	
-	private void setAllTrue() {
+	public void setAllTrue() {
 		lblTitreImages.setVisible(true);
 		btnSearchImage.setVisible(true);
 		txtLienImage.setVisible(true);

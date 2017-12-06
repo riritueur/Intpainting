@@ -28,32 +28,17 @@ public class ResultJFrame extends JFrame {
 	private JPanel contentPane;
 	protected ResultJFrame that = this;
 
-	// public static void main(String[] args) throws ClassNotFoundException,
-	// InstantiationException, IllegalAccessException,
-	// UnsupportedLookAndFeelException {
-	// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	// EventQueue.invokeLater(new Runnable() {
-	// public void run() {
-	// try {
-	// ResultJFrame frame = new ResultJFrame(null);
-	// frame.setVisible(true);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// });
-	// }
-
 	public ResultJFrame(BufferedImage result) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Inpainting");
 		setBounds(315, 100, 430, 450);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		JLabel image = new JLabel();
 		image.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		image.setOpaque(true);
@@ -106,6 +91,7 @@ public class ResultJFrame extends JFrame {
 		btnQuitter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				InpaintingJFrame.traitement = false;
 			}
 		});
 	}
