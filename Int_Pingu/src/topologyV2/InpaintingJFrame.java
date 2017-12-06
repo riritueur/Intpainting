@@ -340,6 +340,7 @@ public class InpaintingJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (!txtLienImage.getText().isEmpty() || !txtLienMasque.getText().isEmpty() && !traitement) {
+						
 						traitement = true;
 						lblLoading.setVisible(true);
 						JFrame result = new ResultJFrame(doTheIntpainting());
