@@ -11,7 +11,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,16 +28,13 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import java.awt.SystemColor;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 
 public class InpaintingJFrame extends JFrame {
 
@@ -419,32 +415,7 @@ public class InpaintingJFrame extends JFrame {
 					pixels[k++] = matrix.val[i][j].val[c];
 		
 		return img;
-	}
-	
-	private boolean setAllFalse() {
-		lblTitreImages.setVisible(false);
-		btnSearchImage.setVisible(false);
-		txtLienImage.setVisible(false);
-		lblImage.setVisible(false);
-		txtLienMasque.setVisible(false);
-		lblMasque.setVisible(false);
-		btnSearchMasque.setVisible(false);
-		image.setVisible(false);
-		masque.setVisible(false);
-		separator.setVisible(false);
-		lblTitreCouleur.setVisible(false);
-		lblCouleur.setVisible(false);
-		btnExec.setVisible(false);
-		btnColorPicker.setVisible(false);
-		txtR.setVisible(false);
-		txtG.setVisible(false);
-		txtB.setVisible(false);
-		btnApply.setVisible(false);
-		lblLoading.setVisible(false);
-		
-		return true;
-	}
-	
+	}	
 	
 	public void setAllTrue() {
 		lblTitreImages.setVisible(true);
