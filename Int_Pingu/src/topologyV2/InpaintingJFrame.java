@@ -112,7 +112,7 @@ public class InpaintingJFrame extends JFrame {
 		lblLoading.setForeground(new Color(255, 255, 255));
 		lblLoading.setFocusable(false);
 		lblLoading.setVisible(false);
-		lblLoading.setIcon(new ImageIcon("./Image/loading.gif"));
+		lblLoading.setIcon(new ImageIcon(InpaintingJFrame.class.getResource("loading.gif")));
 		lblLoading.setBounds(286, 95, 398, 313);
 		contentPane.add(lblLoading);
 
