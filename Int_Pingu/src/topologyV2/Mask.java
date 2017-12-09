@@ -98,9 +98,10 @@ public class Mask extends BoundingBox
 		{
 			super(matrix);
 			val=new boolean[width][height];
-			for(int j=0;j<height;j++)
-				for(int i=0;i<width;i++)
-					val[i][j]=matrix.val[i][j].isequalto(color);
+			for(int i=0;i<height;i++){
+				for(int j=0;j<width;j++)
+					val[j][i]=matrix.val[j][i].isequalto(color);
+			}
 		}
 		/**
 			@param fileName File Name of a bmp image 3x8bits that defines the mask
