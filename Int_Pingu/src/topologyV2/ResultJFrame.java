@@ -29,6 +29,7 @@ public class ResultJFrame extends JFrame {
 	protected ResultJFrame that = this;
 
 	public ResultJFrame(BufferedImage result) {
+		InpaintingJFrame.timer.stop();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Inpainting");
@@ -56,7 +57,7 @@ public class ResultJFrame extends JFrame {
 		image.setIcon(new ImageIcon(newimg));
 		contentPane.add(image);
 
-		JButton btnDL = new JButton("Télécharger");
+		JButton btnDL = new JButton("T\u00E9l\u00E9charger");
 		btnDL.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnDL.setBounds(28, 362, 165, 40);
 		contentPane.add(btnDL);
@@ -68,7 +69,7 @@ public class ResultJFrame extends JFrame {
 
 		btnDL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser("./Image");
+				JFileChooser chooser = new JFileChooser(System.getProperty("user.home") + "\\Images\\");
 				chooser.setAcceptAllFileFilterUsed(false);
 				FileFilter imagesFilter = new FileNameExtensionFilter("Images", "bmp");
 				chooser.setDialogTitle("Choisir destination");

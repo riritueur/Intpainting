@@ -33,6 +33,8 @@ import javax.swing.JSeparator;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
 import java.awt.SystemColor;
 import javax.swing.border.SoftBevelBorder;
 
@@ -40,7 +42,7 @@ public class InpaintingJFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	private static InpaintingJFrame frame;
+	static InpaintingJFrame frame;
 	private boolean r = true, g = true, b = true;
 	public static boolean traitement = false;
 	
@@ -65,6 +67,8 @@ public class InpaintingJFrame extends JFrame {
 	private JLabel lblTitreImages;
 	private JLabel lblLoading;
 	private JLabel lblTitre;
+	
+	public static Timer timer;
 	
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
@@ -112,7 +116,7 @@ public class InpaintingJFrame extends JFrame {
 		lblLoading.setBounds(286, 95, 398, 313);
 		contentPane.add(lblLoading);
 
-		lblTitreImages = new JLabel("Sélection des 2 images");
+		lblTitreImages = new JLabel("S\u00E9lection des 2 images");
 		lblTitreImages.setForeground(new Color(210, 105, 30));
 		lblTitreImages.setBackground(Color.WHITE);
 		lblTitreImages.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -255,7 +259,7 @@ public class InpaintingJFrame extends JFrame {
 		btnSearchImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				JFileChooser chooser = new JFileChooser("./Image");
+				JFileChooser chooser = new JFileChooser(System.getProperty("user.home") + "\\Images\\");
 				chooser.setAcceptAllFileFilterUsed(false);
 				FileFilter imagesFilter = new FileNameExtensionFilter("Image", "bmp");
 				chooser.setDialogTitle("Choisir une image");
@@ -289,7 +293,7 @@ public class InpaintingJFrame extends JFrame {
 		btnSearchMasque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				JFileChooser chooser = new JFileChooser("./Image");
+				JFileChooser chooser = new JFileChooser(System.getProperty("user.home") + "\\Images\\");
 				chooser.setAcceptAllFileFilterUsed(false);
 				FileFilter imagesFilter = new FileNameExtensionFilter("Image", "bmp");
 				chooser.setDialogTitle("Choisir une image");
@@ -339,9 +343,20 @@ public class InpaintingJFrame extends JFrame {
 						
 						traitement = true;
 						lblLoading.setVisible(true);
-						JFrame result = new ResultJFrame(doTheIntpainting());
-						result.setVisible(true);
-						frame.setAllTrue();
+						timer = new Timer(10, new ActionListener(){
+							@Override
+							public void actionPerformed(ActionEvent evt){
+								JFrame result;
+								try {
+									result = new ResultJFrame(doTheIntpainting());
+									result.setVisible(true);
+									frame.setAllTrue();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+						});
+						timer.start();
 						
 					} else
 						JOptionPane.showMessageDialog(that, "Erreur : Image et/ou masque incorrect",
