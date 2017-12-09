@@ -335,7 +335,7 @@ public class InpaintingJFrame extends JFrame {
 		btnExec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (!txtLienImage.getText().isEmpty() || !txtLienMasque.getText().isEmpty() && !traitement) {
+					if (!txtLienImage.getText().isEmpty() && !txtLienMasque.getText().isEmpty() && !traitement) {
 						
 						traitement = true;
 						lblLoading.setVisible(true);
