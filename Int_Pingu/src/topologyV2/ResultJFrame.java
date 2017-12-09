@@ -34,6 +34,7 @@ public class ResultJFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Inpainting");
 		setBounds(315, 100, 430, 450);
+		setIconImage(new ImageIcon(InpaintingJFrame.class.getResource("logo.png")).getImage());
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

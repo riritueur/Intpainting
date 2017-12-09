@@ -93,6 +93,7 @@ public class InpaintingJFrame extends JFrame {
 		setTitle("Inpainting");
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 960, 521);
+		setIconImage(new ImageIcon(InpaintingJFrame.class.getResource("logo.png")).getImage());
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
