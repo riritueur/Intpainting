@@ -2,19 +2,9 @@ package topologyV2;
 
 import java.util.ArrayList;
 
-/**
-	List of successive vertices of a connected component of the boundary of the mask.
-	The edges are ordrered clockwise.
-*/
 public class Component {
-	/**
-		Array of the vertices of the connected component ordered clockwise
-	*/
+	
 	public ArrayList<Point> points;
-	/**
-		Construct the connected component strating from the seedPoint,
-		of the tzgged edges
-	*/
 	public Component(Tag tag,Point seedPoint) {
 		points=new ArrayList<Point>();
 		Point currentPoint=seedPoint;
@@ -26,9 +16,8 @@ public class Component {
 			currentPoint=tag.boundary.edges.get(k).border()[1];
 			k=tag.indexActiveOuterEdge(currentPoint);}
 		if(!(seedPoint.isEqualTo(currentPoint))) points.add(currentPoint);}
-	/**
-		Display the sequence of vertices of the connected component
-	*/
+	
+	
 	@Override
 	public String toString() {
 		String result = "Component :\n";

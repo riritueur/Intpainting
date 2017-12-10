@@ -164,22 +164,16 @@ public class Inpainting {
 		if(Box==null)
 			Box=new BoundingBox(new int[]{0,0,m.width,m.height});
 		BoundingBox searchBox=Box.crop(patch);
-		// We compute the difference on all the search box, then
-		// look at the minimum.
-		// It should be a little faster to do it all in one step
-		double[][] norms=new double[searchBox.width][searchBox.height];	// filled with zero by default
+		double[][] norms=new double[searchBox.width][searchBox.height];	
 		for(int i=0;i<searchBox.width;i++)
-			for(int j=0;j<searchBox.height;j++) norms[i][j]=0;		// A priori inutile
+			for(int j=0;j<searchBox.height;j++) norms[i][j]=0;
 		for(int dx=patch.boundingBox.bb[0];dx<patch.boundingBox.bb[2];dx++)
 			for(int dy=patch.boundingBox.bb[1];dy<patch.boundingBox.bb[3];dy++){
 				int I=patch.point.i+dx;			int J=patch.point.j+dy;
 				int i_min=searchBox.bb[0]+dx; 	
 				int j_min=searchBox.bb[1]+dy;	
-				// penalization of patch intersectin the mask
 				for(int k=0;k<searchBox.width;k++) for(int l=0;l<searchBox.height;l++)
 						norms[k][l]+=penMask[i_min+k][j_min+l];
-				
-				// add contribution to points outside the mask
 				if (!m.val[I][J])
 					for(int k=0;k<searchBox.width;k++)  for(int l=0;l<searchBox.height;l++)
 							norms[k][l]+=Color.dist(image.val[i_min+k][j_min+l],image.val[I][J]);
@@ -228,7 +222,7 @@ public class Inpainting {
 					if (m.touchedBy(point)){
 						Patch patch=new Patch(point,halfwidth,window);
 						Point best_point=best_match(patch,searchBox);
-						copyPatch(best_point,patch);	//update image and mask
+						copyPatch(best_point,patch);
 					}
 				}
 			}

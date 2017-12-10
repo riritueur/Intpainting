@@ -53,13 +53,6 @@ public class Matrix extends BoundingBox		// function of the domain
 					byte g=pixels[k++];
 					byte b=pixels[k++];
 					val[i][j]=new Color(r,g,b);
-					//val[i][j]=new Color(pixels[k++],pixels[k++],pixels[k++]);
 				}
-					/*
-					if (color.isequalto(new Color(pixels[k++],pixels[k++],pixels[k++])))
-					{
-						val[i][j]=1;
-					} else val[i][j]=0;
-					*/
 		}		
 	}
