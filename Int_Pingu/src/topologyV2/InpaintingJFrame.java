@@ -64,11 +64,12 @@ public class InpaintingJFrame extends JFrame {
 	private JLabel lblMasque;
 	private JLabel lblImage;
 	private JButton btnSearchImage;
-	private JLabel lblTitreImages;
 	private JLabel lblLoading;
 	private JLabel lblTitre;
 	
 	public static Timer timer;
+	private JTextField textField;
+	private JTextField textField_1;
 	
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
@@ -92,7 +93,7 @@ public class InpaintingJFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Inpainting");
 		setLocationRelativeTo(null);
-		setBounds(100, 100, 960, 521);
+		setBounds(100, 100, 960, 540);
 		setIconImage(new ImageIcon(InpaintingJFrame.class.getResource("logo.png")).getImage());
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
@@ -114,15 +115,8 @@ public class InpaintingJFrame extends JFrame {
 		lblLoading.setFocusable(false);
 		lblLoading.setVisible(false);
 		lblLoading.setIcon(new ImageIcon(InpaintingJFrame.class.getResource("loading.gif")));
-		lblLoading.setBounds(286, 95, 398, 313);
+		lblLoading.setBounds(274, 91, 398, 313);
 		contentPane.add(lblLoading);
-
-		lblTitreImages = new JLabel("S\u00E9lection des 2 images");
-		lblTitreImages.setForeground(new Color(210, 105, 30));
-		lblTitreImages.setBackground(Color.WHITE);
-		lblTitreImages.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTitreImages.setBounds(42, 99, 243, 30);
-		contentPane.add(lblTitreImages);
 
 		btnSearchImage = new JButton("Browse");
 		btnSearchImage.setBackground(SystemColor.textInactiveText);
@@ -207,7 +201,7 @@ public class InpaintingJFrame extends JFrame {
 		btnExec = new JButton("Restaurer");
 		btnExec.setBackground(new Color(255, 255, 255));
 		btnExec.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnExec.setBounds(518, 419, 228, 39);
+		btnExec.setBounds(540, 421, 228, 47);
 		contentPane.add(btnExec);
 
 		btnColorPicker = new JButton("Color Picker");
@@ -256,6 +250,52 @@ public class InpaintingJFrame extends JFrame {
 		btnApply.setBackground(SystemColor.textInactiveText);
 		btnApply.setBounds(182, 427, 65, 30);
 		contentPane.add(btnApply);
+		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.RIGHT);
+		textField.setForeground(Color.LIGHT_GRAY);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField.setFocusable(false);
+		textField.setColumns(10);
+		textField.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
+		textField.setBackground((Color) null);
+		textField.setBounds(178, 44, 59, 30);
+		contentPane.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		textField_1.setForeground(Color.LIGHT_GRAY);
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField_1.setFocusable(false);
+		textField_1.setColumns(10);
+		textField_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
+		textField_1.setBackground((Color) null);
+		textField_1.setBounds(52, 44, 65, 30);
+		contentPane.add(textField_1);
+		
+		JLabel lblTaillePatch = new JLabel("Taille du patch");
+		lblTaillePatch.setForeground(new Color(210, 105, 30));
+		lblTaillePatch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTaillePatch.setBackground(Color.WHITE);
+		lblTaillePatch.setBounds(31, 11, 94, 30);
+		contentPane.add(lblTaillePatch);
+		
+		JLabel lblTailleRecherche = new JLabel("Taille recherche");
+		lblTailleRecherche.setForeground(new Color(210, 105, 30));
+		lblTailleRecherche.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTailleRecherche.setBackground(Color.WHITE);
+		lblTailleRecherche.setBounds(156, 11, 101, 30);
+		contentPane.add(lblTailleRecherche);
+		
+		JButton button = new JButton("Apply");
+		button.setBackground(SystemColor.textInactiveText);
+		button.setBounds(108, 91, 83, 30);
+		contentPane.add(button);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBackground(Color.LIGHT_GRAY);
+		separator_1.setBounds(10, 143, 329, 1);
+		contentPane.add(separator_1);
 
 		btnSearchImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
