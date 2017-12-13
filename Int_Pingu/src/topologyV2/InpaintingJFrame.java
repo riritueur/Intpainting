@@ -45,6 +45,7 @@ public class InpaintingJFrame extends JFrame {
 	static InpaintingJFrame frame;
 	private boolean r = true, g = true, b = true;
 	public static boolean traitement = false;
+	private int patch = 5, recherche = 5;
 	
 	private JPanel contentPane;
 	private JTextField txtLienImage;
@@ -68,8 +69,8 @@ public class InpaintingJFrame extends JFrame {
 	private JLabel lblTitre;
 	
 	public static Timer timer;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtTailleRecherche;
+	private JTextField txtTaillePatch;
 	
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
@@ -251,27 +252,25 @@ public class InpaintingJFrame extends JFrame {
 		btnApply.setBounds(182, 427, 65, 30);
 		contentPane.add(btnApply);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField.setForeground(Color.LIGHT_GRAY);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField.setFocusable(false);
-		textField.setColumns(10);
-		textField.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
-		textField.setBackground((Color) null);
-		textField.setBounds(178, 44, 59, 30);
-		contentPane.add(textField);
+		txtTailleRecherche = new JTextField("5");
+		txtTailleRecherche.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTailleRecherche.setForeground(Color.LIGHT_GRAY);
+		txtTailleRecherche.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtTailleRecherche.setColumns(10);
+		txtTailleRecherche.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
+		txtTailleRecherche.setBackground((Color) null);
+		txtTailleRecherche.setBounds(178, 44, 59, 30);
+		contentPane.add(txtTailleRecherche);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_1.setForeground(Color.LIGHT_GRAY);
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_1.setFocusable(false);
-		textField_1.setColumns(10);
-		textField_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
-		textField_1.setBackground((Color) null);
-		textField_1.setBounds(52, 44, 65, 30);
-		contentPane.add(textField_1);
+		txtTaillePatch = new JTextField("5");
+		txtTaillePatch.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTaillePatch.setForeground(Color.LIGHT_GRAY);
+		txtTaillePatch.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtTaillePatch.setColumns(10);
+		txtTaillePatch.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
+		txtTaillePatch.setBackground((Color) null);
+		txtTaillePatch.setBounds(52, 44, 65, 30);
+		contentPane.add(txtTaillePatch);
 		
 		JLabel lblTaillePatch = new JLabel("Taille du patch");
 		lblTaillePatch.setForeground(new Color(210, 105, 30));
@@ -287,10 +286,10 @@ public class InpaintingJFrame extends JFrame {
 		lblTailleRecherche.setBounds(156, 11, 101, 30);
 		contentPane.add(lblTailleRecherche);
 		
-		JButton button = new JButton("Apply");
-		button.setBackground(SystemColor.textInactiveText);
-		button.setBounds(108, 91, 83, 30);
-		contentPane.add(button);
+		JButton btnParam = new JButton("Apply");
+		btnParam.setBackground(SystemColor.textInactiveText);
+		btnParam.setBounds(108, 91, 83, 30);
+		contentPane.add(btnParam);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBackground(Color.LIGHT_GRAY);
@@ -407,6 +406,28 @@ public class InpaintingJFrame extends JFrame {
 				}
 			}
 		});
+		
+		btnParam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int tmpPatch = Integer.parseInt(txtTailleRecherche.getText());
+					int tmpRecherche = Integer.parseInt(txtTaillePatch.getText());
+					if(patch > 0 && recherche > 0) {
+						patch = tmpPatch;
+						recherche = tmpRecherche;
+						
+						JOptionPane.showMessageDialog(that, "Modification apportée !",
+								"", 1);
+					} else
+						JOptionPane.showMessageDialog(that, "Erreur : Taille du patch et/ou de recherche incorrect",
+								"Erreur de traitement", 0);
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(that, "Erreur : Taille du patch et/ou de recherche incorrect",
+								"Erreur de traitement", 0);
+				}
+			}
+		});
+		
 
 		txtR.addMouseListener(new MouseAdapter() {
 			@Override
@@ -460,7 +481,7 @@ public class InpaintingJFrame extends JFrame {
 				lblCouleur.getBackground().getGreen(), lblCouleur.getBackground().getRed());
 		Mask mask = new Mask(matrix2, color);
 		Inpainting inpainting = new Inpainting(matrix, mask);
-		inpainting.restore(5, 5);
+		inpainting.restore(patch, recherche);
 		BufferedImage img = new BufferedImage(inpainting.image.width, inpainting.image.height,
 				BufferedImage.TYPE_3BYTE_BGR);
 		byte[] pixels = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
@@ -474,7 +495,6 @@ public class InpaintingJFrame extends JFrame {
 	}	
 	
 	public void setAllTrue() {
-		lblTitreImages.setVisible(true);
 		btnSearchImage.setVisible(true);
 		txtLienImage.setVisible(true);
 		lblImage.setVisible(true);
