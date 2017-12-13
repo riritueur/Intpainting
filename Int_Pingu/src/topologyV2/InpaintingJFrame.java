@@ -368,6 +368,9 @@ public class InpaintingJFrame extends JFrame {
 		btnColorPicker.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblCouleur.setBackground(JColorChooser.showDialog(that, "Color Picker", Color.BLACK));
+				txtR.setText(""+lblCouleur.getBackground().getRed());
+				txtG.setText(""+lblCouleur.getBackground().getGreen());
+				txtB.setText(""+lblCouleur.getBackground().getBlue());
 			}
 		});
 		btnApply.addActionListener(new ActionListener() {
